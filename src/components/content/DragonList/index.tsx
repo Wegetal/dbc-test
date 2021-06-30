@@ -74,7 +74,7 @@ const DragonList: React.FC<Props> = (props: Props) => {
           {dragons.map((dragon: any, i: number) => {
             return (
               <DragonListItem
-                src={"/assets/adgnor.png"}
+                src={"/assets/dragon.png"}
                 onViewCallback={onViewCallback}
                 onEditCallback={onEditCallback}
                 onRemoveCallback={onRemoveCallback}
