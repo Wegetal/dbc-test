@@ -44,6 +44,7 @@ export const Context = createContext<AuthContext>({} as AuthContext),
       },
       onSignOut = () => {
         Auth.signOut();
+        setAuth(null);
         history.push("/login");
       };
     React.useEffect(() => {
