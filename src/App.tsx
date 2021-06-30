@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import "./App.css";
+import Routes from "./routing";
+import Contexts from "./context";
 
-function App() {
+/**
+ * @author Davi Wegner
+ * @email davi@wegn.dev
+ * @created 26-06-2021
+ */
+
+const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {Contexts.reduce(
+        (acc, crr) => {
+          acc = <crr.Provider>{acc}</crr.Provider>;
+          return acc;
+        },
+        <Router>
+          <Routes />
+        </Router>
+      )}
     </div>
   );
-}
+};
 
 export default App;
