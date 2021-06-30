@@ -13,15 +13,12 @@ import Contexts from "./context";
 const App: React.FC = () => {
   return (
     <div className="App">
-      {Contexts.reduce(
-        (acc, crr) => {
+      <Router>
+        {Contexts.reduce((acc, crr) => {
           acc = <crr.Provider>{acc}</crr.Provider>;
           return acc;
-        },
-        <Router>
-          <Routes />
-        </Router>
-      )}
+        }, <Routes />)}
+      </Router>
     </div>
   );
 };

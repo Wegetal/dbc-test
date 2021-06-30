@@ -1,4 +1,5 @@
 import React, { createContext, ReactNode, useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Notification } from "..";
 import * as Auth from "../../services/api/auth";
 import { FormTypes } from "../../types";
@@ -21,6 +22,7 @@ export const Context = createContext<AuthContext>({} as AuthContext),
   Provider: React.FC<Props> = (props: Props) => {
     const { children } = props,
       { onSetMessage } = useContext(Notification.Context),
+      history = useHistory(),
       [auth, setAuth] = useState<string | null>(null),
       onSignIn = (form: FormTypes.Login) => {
         Auth.signIn(form)
@@ -42,6 +44,7 @@ export const Context = createContext<AuthContext>({} as AuthContext),
       },
       onSignOut = () => {
         Auth.signOut();
+        history.push("/login");
       };
     React.useEffect(() => {
       if (localStorage.getItem("token")) {
