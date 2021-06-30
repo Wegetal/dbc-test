@@ -1,5 +1,5 @@
 import * as Auth from "./Auth";
-
+import * as Notification from "./Notification";
 /**
  * @author Davi Wegner
  * @email davi@wegn.dev
@@ -12,8 +12,8 @@ import * as Auth from "./Auth";
  * @author Davi Wegner
  * @created 27-06-2021
  */
-const Contexts = [Auth];
+const Contexts = [Notification, Auth];
 
-export { Auth };
+export { Auth, Notification };
 
 export default Contexts;

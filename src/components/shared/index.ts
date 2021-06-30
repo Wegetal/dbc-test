@@ -10,6 +10,7 @@ import List from "./List";
 import ListItem from "./ListItem";
 import Loader from "./Loader";
 import LogoutButton from "./LogoutButton";
+import NotificationBar from "./NotificationBar";
 import Paper from "./Paper";
 import PassField from "./PassField";
 import TextField from "./TextField";
@@ -30,4 +31,5 @@ export {
   Paper,
   PassField,
   TextField,
+  NotificationBar,
 };

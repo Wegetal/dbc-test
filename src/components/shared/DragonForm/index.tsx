@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import Button from "../Button";
 import Paper from "../Paper";
 import TextField from "../TextField";
 import { DragonTypes } from "../../../types";
+import { Notification } from "../../../context";
 
 /**
  * @author Davi Wegner
@@ -26,6 +27,7 @@ const DragonFormContainer = styled(Paper)`
   `,
   DragonForm: React.FC<Props> = (props: Props): JSX.Element => {
     const { dragon, onSubmitCallback } = props,
+      { onSetMessage } = useContext(Notification.Context),
       [loading, setLoading] = useState<boolean>(false),
       [form, setForm] = useState<DragonTypes.Form>(
         (dragon || {
@@ -42,9 +44,20 @@ const DragonFormContainer = styled(Paper)`
       onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        onSubmitCallback(form).then((res) => {
-          setLoading(false);
-        });
+        onSubmitCallback(form)
+          .then((res) => {
+            onSetMessage({
+              text: "Operação realizada com sucesso",
+              type: "success",
+            });
+            setLoading(false);
+          })
+          .catch((err) => {
+            onSetMessage({
+              text: "Houve algum erro na operação",
+              type: "error",
+            });
+          });
       };
 
     return (

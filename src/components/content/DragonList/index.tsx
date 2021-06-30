@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from "react";
 import { DragonListItem, Loader, List } from "../../shared";
 import { useHistory } from "react-router-dom";
-import { withRouter } from "react-router-dom";
 import { DragonTypes } from "../../../types";
 import * as DragonApi from "../../../services/api/dragon";
+import { useContext } from "react";
+import { Notification } from "../../../context";
 
 /**
  * @author Davi Wegner
@@ -14,6 +15,7 @@ interface Props {}
 
 const DragonList: React.FC<Props> = (props: Props) => {
   const history = useHistory(),
+    { onSetMessage } = useContext(Notification.Context),
     [loading, setLoading] = useState<boolean>(false),
     [dragons, setDragons] = useState<DragonTypes.Self[]>(),
     onViewCallback = useCallback(
@@ -31,18 +33,30 @@ const DragonList: React.FC<Props> = (props: Props) => {
     onRemoveCallback = useCallback(
       (id: number) => {
         setLoading(true);
-        DragonApi.remove(id).then((res) => {
-          if (dragons) {
-            let removeIndex: number = dragons.findIndex(
-              (dragon: DragonTypes.Self) => dragon.id === id
-            );
-            if (removeIndex >= 0) dragons.splice(removeIndex, 1);
-            setDragons(dragons);
-            setLoading(false);
-          }
-        });
+        DragonApi.remove(id)
+          .then((res) => {
+            console.log(res);
+            if (dragons) {
+              let removeIndex: number = dragons.findIndex(
+                (dragon: DragonTypes.Self) => dragon.id === id
+              );
+              if (removeIndex >= 0) dragons.splice(removeIndex, 1);
+              setDragons(dragons);
+              setLoading(false);
+              onSetMessage({
+                text: `Dragão excluido com sucesso`,
+                type: "success",
+              });
+            }
+          })
+          .catch((err) => {
+            onSetMessage({
+              text: `Houve algum problema ao excluir o dragão`,
+              type: "error",
+            });
+          });
       },
-      [dragons]
+      [dragons, onSetMessage]
     );
   React.useEffect(() => {
     setLoading(true);
@@ -75,4 +89,4 @@ const DragonList: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default withRouter(DragonList);
+export default DragonList;

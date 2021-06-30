@@ -2,7 +2,7 @@ import React, { ReactElement, useContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import { Auth } from "../context";
 import routes from "./routes";
-import LogoutButton from "../components/shared/LogoutButton";
+import { NotificationBar, LogoutButton } from "../components/shared";
 
 /**
  * @author Davi Wegner
@@ -30,6 +30,7 @@ const Routes: React.FC = (props: any) => {
           return acc;
         }, [])}
       </Switch>
+      <NotificationBar />
       {auth && <LogoutButton />}
     </>
   );
