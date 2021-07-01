@@ -1,4 +1,4 @@
-import * as FormTypes from "./form";
+import * as AuthTypes from "./auth";
 import * as DragonTypes from "./dragon";
 /**
  * @author Davi Wegner
@@ -6,4 +6,4 @@ import * as DragonTypes from "./dragon";
  * @created 27-06-2021
  */
 
-export { FormTypes, DragonTypes };
+export { AuthTypes, DragonTypes };

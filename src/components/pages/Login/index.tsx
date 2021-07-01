@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { TextField, PassField, Paper, Button } from "../../shared";
 import * as Auth from "../../../context/Auth";
-import { FormTypes } from "../../../types";
+import { AuthTypes } from "../../../types";
 
 /**
  * @author Davi Wegner
@@ -37,13 +37,13 @@ const PageContainer = styled.div`
   `,
   Login: React.FC = (props: Props) => {
     const auth = useContext(Auth.Context),
-      [form, setForm] = useState<FormTypes.Login>({} as FormTypes.Login),
+      [form, setForm] = useState<AuthTypes.Login>({} as AuthTypes.Login),
       onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         auth.onSignIn(form);
       },
       onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        form[e.currentTarget.name as keyof FormTypes.Login] =
+        form[e.currentTarget.name as keyof AuthTypes.Login] =
           e.currentTarget.value;
         setForm({ ...form });
       };

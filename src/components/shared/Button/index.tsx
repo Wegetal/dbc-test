@@ -12,7 +12,7 @@ interface Props extends React.HTMLProps<HTMLButtonElement> {
   fullWidth?: boolean;
   children?: ReactNode | ReactNode[];
 }
-const ButtonBase: React.FC<any> = styled.button<any>`
+const ButtonBase: React.FC<Props> = styled.button<Props>`
     display: flex;
     align-items: center;
     justify-content: center;

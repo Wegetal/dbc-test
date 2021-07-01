@@ -2,7 +2,7 @@ import React, { createContext, ReactNode, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Notification } from "..";
 import * as Auth from "../../services/api/auth";
-import { FormTypes } from "../../types";
+import { AuthTypes } from "../../types";
 
 /**
  * @author Davi Wegner
@@ -12,7 +12,7 @@ import { FormTypes } from "../../types";
 
 export interface AuthContext {
   auth: string | null;
-  onSignIn: (form: FormTypes.Login) => void;
+  onSignIn: (form: AuthTypes.Login) => void;
   onSignOut: React.MouseEventHandler<HTMLButtonElement>;
 }
 interface Props {
@@ -24,7 +24,7 @@ export const Context = createContext<AuthContext>({} as AuthContext),
       { onSetMessage } = useContext(Notification.Context),
       history = useHistory(),
       [auth, setAuth] = useState<string | null>(null),
-      onSignIn = (form: FormTypes.Login) => {
+      onSignIn = (form: AuthTypes.Login) => {
         Auth.signIn(form)
           .then((res) => {
             //call notification bar or any user warning ui to inform auth result
