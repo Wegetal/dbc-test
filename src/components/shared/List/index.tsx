@@ -19,7 +19,9 @@ const ListContainer = styled.div<any>`
         flex: 1;
         ${(props) => {
           let length = props.dataLength | 0;
-          return `flex-basis: ${(3 - (length % 3)) * 33.333}%;`;
+          if (length % 3 > 0)
+            return `flex-basis: ${(3 - (length % 3)) * 33.333}%;`;
+          return `flex-basis: 0%`;
         }}
       }
     }
